@@ -1,8 +1,8 @@
+#!/usr/bin/python
 #  Joel Gurnett
 #  Converts ts files to mp4
 #  June 21, 2019
 
-#!/usr/bin/python
 import subprocess
 import os
 from ffmpy import FFmpeg
@@ -21,12 +21,8 @@ def getFiles(dirPath):
 		if(os.path.isdir(dirPath + file)):
 			# don't look at hidden files
 			if(file[0] != "."):
-				inner = os.listdir(dirPath + file)
-				for tmp in inner:
-					tmpname, tmp_extension = os.path.splitext(tmp)
-					if tmp_extension == ".ts":
-						videoFiles.append(dirPath + file + "/" + tmp)
-
+				tmpList = innerFolder(dirPath, file)
+				videoFiles.extend(tmpList)
 
 		if file_extension == ".ts":
 			videoFiles.append(dirPath + file)
@@ -35,6 +31,19 @@ def getFiles(dirPath):
 		return videoFiles
 	return None
 
+def innerFolder(path, file):
+	tmpList = []
+	inner = os.listdir(path + file)
+	for tmp in inner:
+		if (os.path.isdir(path + "/" + tmp)):
+			tList = innerFolder(path + file +"/", tmp)
+			tmpList.extend(tList)
+			
+		tmpname, tmp_extension = os.path.splitext(tmp)
+		if tmp_extension == ".ts":
+			tmpList.append(path + file + "/" + tmp)
+
+	return tmpList
 
 # execute program
 def main():
