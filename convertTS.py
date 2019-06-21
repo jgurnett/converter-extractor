@@ -51,7 +51,7 @@ def main():
 	dirPath = "/Users/joelgurnett/Downloads/show/"
 	# get list of ts files
 	vids = getFiles(dirPath)
-
+	print("list: " + str(vids))
 	# iterate through the list
 	if vids != None:
 		for index, video in enumerate(vids):
