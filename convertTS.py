@@ -6,6 +6,7 @@
 import subprocess
 import os
 from ffmpy import FFmpeg
+from datetime import date
 
 # gets all ts files that are in given path
 #
@@ -16,16 +17,16 @@ def getFiles(dirPath):
 	# go through all files in directory
 	for index, file in enumerate(files):
 		filename, file_extension = os.path.splitext(file)
+		if(filename != "Silicon Valley"):
+			# if the file is a directory then iterate through that
+			if(os.path.isdir(dirPath + file)):
+				# don't look at hidden files
+				if(file[0] != "."):
+					tmpList = innerFolder(dirPath, file)
+					videoFiles.extend(tmpList)
 
-		# if the file is a directory then iterate through that
-		if(os.path.isdir(dirPath + file)):
-			# don't look at hidden files
-			if(file[0] != "."):
-				tmpList = innerFolder(dirPath, file)
-				videoFiles.extend(tmpList)
-
-		if file_extension == ".ts":
-			videoFiles.append(dirPath + file)
+			if file_extension == ".ts":
+				videoFiles.append(dirPath + file)
 
 	if len(videoFiles) > 0:
 		return videoFiles
@@ -34,8 +35,9 @@ def getFiles(dirPath):
 def innerFolder(path, file):
 	tmpList = []
 	inner = os.listdir(path + file)
+	# print(path + file)
 	for tmp in inner:
-		if (os.path.isdir(path + "/" + tmp)):
+		if (os.path.isdir(path + file + "/" + tmp)):
 			tList = innerFolder(path + file +"/", tmp)
 			tmpList.extend(tList)
 			
@@ -45,13 +47,20 @@ def innerFolder(path, file):
 
 	return tmpList
 
+def output(files):
+	today = date.today()
+	f =  open("/home/joel/Desktop/converted/converted_" + str(today) + ".txt", 'w+')
+	for item in files:
+		f.write("%s\n" % item)
+	f.close()
+
 # execute program
 def main():
 	# main path to start on 
-	dirPath = "/Users/joelgurnett/Downloads/show/"
+	dirPath = "/home/joel/media/shows/"
 	# get list of ts files
 	vids = getFiles(dirPath)
-	print("list: " + str(vids))
+	output(vids)
 	# iterate through the list
 	if vids != None:
 		for index, video in enumerate(vids):
@@ -64,7 +73,7 @@ def main():
 			# 	print(file)
 
 			# convert ts to mp4
-			p = subprocess.call(["ffmpeg", "-i", infile, outfile])
+			p = subprocess.call(["ffmpeg", "-i", infile, "-s", "hd720", outfile])
 			# rmove ts file
 			os.remove(infile)
 	else:
