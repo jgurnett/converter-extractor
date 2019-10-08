@@ -17,16 +17,15 @@ def getFiles(dirPath):
 	# go through all files in directory
 	for index, file in enumerate(files):
 		filename, file_extension = os.path.splitext(file)
-		if(filename != "Silicon Valley"):
-			# if the file is a directory then iterate through that
-			if(os.path.isdir(dirPath + file)):
-				# don't look at hidden files
-				if(file[0] != "."):
-					tmpList = innerFolder(dirPath, file)
-					videoFiles.extend(tmpList)
+		# if the file is a directory then iterate through that
+		if(os.path.isdir(dirPath + file)):
+			# don't look at hidden files
+			if(file[0] != "."):
+				tmpList = innerFolder(dirPath, file)
+				videoFiles.extend(tmpList)
 
-			if file_extension == ".ts":
-				videoFiles.append(dirPath + file)
+		if file_extension == ".ts":
+			videoFiles.append(dirPath + file)
 
 	if len(videoFiles) > 0:
 		return videoFiles
