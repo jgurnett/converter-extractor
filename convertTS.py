@@ -30,7 +30,7 @@ def getFiles(dirPath):
 	if len(videoFiles) > 0:
 		return videoFiles
 	return None
-
+# recusive function to go through folders within folder to get a list of .ts files
 def innerFolder(path, file):
 	tmpList = []
 	inner = os.listdir(path + file)
@@ -46,6 +46,7 @@ def innerFolder(path, file):
 
 	return tmpList
 
+# save the list of all .ts files to a log 
 def output(files):
 	today = date.today()
 	f =  open("/home/joel/Desktop/converted/converted_" + str(today) + ".txt", 'w+')
