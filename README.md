@@ -7,4 +7,4 @@
 - ./depend.sh
 
 -
-- if on mac install ffmpeg, python pip, and with pip ffmpy 
+- if on mac install ffmpeg, python pip3, and with pip3 ffmpy, pyunpack, patool 
