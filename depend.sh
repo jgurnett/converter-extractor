@@ -1,6 +1,7 @@
 #!/bin/bash
 
 chmod +x convertTS.py
+chmod +x unrar.py
 sudo apt --assume-yes install ffmpeg
 sudo apt --assume-yes install python3-pip
 sudo apt --assume-yes install unrar
