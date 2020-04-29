@@ -18,7 +18,8 @@ def getFiles(dirPath):
 			# don't look at hidden files
 			if(file[0] != "."):
 				tmpList = getFiles(dirPath + file + "/")
-				videoFiles.extend(tmpList)
+				if tmpList != None:
+					videoFiles.extend(tmpList)
 
 		if file_extension == ".rar":
 			videoFiles.append(dirPath + file)
