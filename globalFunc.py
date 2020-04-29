@@ -1,12 +1,12 @@
 #!/usr/bin/python
 #  Joel Gurnett
 #  Converts ts files to mp4
-#  June 21, 2019
+#  June 21, 2019 - edited April 29, 2020
 
 import os
-# gets all ts files that are in given path
+# recursively gets all ts files that are in given path
 #
-# dirPath = string of path given
+# dirPath: string of path given
 def getFiles(dirPath):
 	videoFiles = []
 	files = os.listdir(dirPath)
@@ -17,7 +17,7 @@ def getFiles(dirPath):
 		if(os.path.isdir(dirPath + file)):
 			# don't look at hidden files
 			if(file[0] != "."):
-				tmpList = innerFolder(dirPath, file)
+				tmpList = getFiles(dirPath + file + "/")
 				videoFiles.extend(tmpList)
 
 		if file_extension == ".rar":
@@ -26,19 +26,3 @@ def getFiles(dirPath):
 	if len(videoFiles) > 0:
 		return videoFiles
 	return None
-
-# recusive function to go through folders within folder to get a list of .ts files
-def innerFolder(path, file):
-	tmpList = []
-	inner = os.listdir(path + file)
-	# print(path + file)
-	for tmp in inner:
-		if (os.path.isdir(path + file + "/" + tmp)):
-			tList = innerFolder(path + file +"/", tmp)
-			tmpList.extend(tList)
-			
-		tmpname, tmp_extension = os.path.splitext(tmp)
-		if tmp_extension == ".rar":
-			tmpList.append(path + file + "/" + tmp)
-
-	return tmpList
