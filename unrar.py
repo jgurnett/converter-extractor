@@ -39,9 +39,9 @@ def main():
 			if rar not in convList:
 				filename, file_extension = os.path.splitext(rar)
 				infile = rar
-				
+
 				# extract the file to this folder
-				Archive(rar).extractall("/home/joel/media/downloads/extracted")
+				Archive(rar).extractall(os.path.dirname(rar) + "/")
 				# write it to the file with the extracted files
 				f.write("\n" + filename + file_extension)
 
