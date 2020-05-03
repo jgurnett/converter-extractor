@@ -1,4 +1,3 @@
-#!/usr/bin/python
 #  Joel Gurnett
 #  Converts ts files to mp4
 #  June 21, 2019 - edited April 29, 2020
