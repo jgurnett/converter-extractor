@@ -31,10 +31,6 @@ def main():
 			infile = video
 			outfile = filename + ".mp4"
 
-			# display all ts files
-			# for file in vids:
-			# 	print(file)
-
 			# convert ts to mp4
 			p = subprocess.call(["ffmpeg", "-i", infile, "-s", "hd720", outfile])
 			# rmove ts file
