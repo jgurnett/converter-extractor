@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 #  Joel Gurnett
 #  Converts ts files to mp4
 #  June 21, 2019 - edited April 29, 2020
@@ -30,10 +30,6 @@ def main():
 			filename, file_extension = os.path.splitext(video)
 			infile = video
 			outfile = filename + ".mp4"
-
-			# display all ts files
-			# for file in vids:
-			# 	print(file)
 
 			# convert ts to mp4
 			p = subprocess.call(["ffmpeg", "-i", infile, "-s", "hd720", outfile])
