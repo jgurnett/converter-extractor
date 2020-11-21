@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 #  Joel Gurnett
 #  unrars files, checks if they are already part of an extracted file
 #  April 29, 2020
@@ -39,11 +39,12 @@ def main():
 			if rar not in convList:
 				filename, file_extension = os.path.splitext(rar)
 				infile = rar
-
+				print("working on: " + os.path.basename(rar) + "...")
 				# extract the file to this folder
 				Archive(rar).extractall(os.path.dirname(rar) + "/")
 				# write it to the file with the extracted files
 				f.write("\n" + filename + file_extension)
+				print("finished: " + os.path.basename(rar) + "\n")
 
 		f.close()
 
