@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 #  Joel Gurnett
 #  unrars files, checks if they are already part of an extracted file
 #  April 29, 2020
